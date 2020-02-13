@@ -19,7 +19,7 @@ void loop() {
 	for (i = 0; i < 10; i++) {
 		for (j = 0; j < 10; j++) {
 			displayBytes(toSegment(i), toSegment(j));
-			delay(250);
+			delay(100);
 		}
 	}
 }

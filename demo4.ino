@@ -8,7 +8,11 @@ const int clockPin = 14; // yellow to 74HC595 pin 11
 
 const int interruptPin = 22;
 
-const int countResetValue = 47;
+// const int countResetValue = 47;
+
+const int resetTime = 15;
+
+IntervalTimer myTimer;
 
 int i, j;
  
@@ -18,23 +22,26 @@ void setup() {
   pinMode(latchPin, OUTPUT);
   pinMode(clockPin, OUTPUT);
   
-  pinMode(interruptPin, INPUT);
-  attachInterrupt(digitalPinToInterrupt(interruptPin), resetCount, RISING);
+  // pinMode(interruptPin, INPUT);
+  // attachInterrupt(digitalPinToInterrupt(interruptPin), resetCount, RISING);
+  myTimer.begin(resetCount, resetTime * 100000);
 }
 
 void resetCount() {
-	int val = countResetValue - 1;
-	if (val < 0 || val > 99) val = 99;
-	
-	i = val / 10 % 10;
-	j = val % 10;
+//  int val = countResetValue - 1;
+// 	if (val < 0 || val > 99) val = 99;
+//
+// 	i = val / 10 % 10;
+// 	j = val % 10;
+	i = 0;
+	j = 0;
 }
 
 void loop() {
 	for (i = 0; i < 10; i++) {
 		for (j = 0; j < 10; j++) {
 			displayBytes(toSegment(i), toSegment(j));
-			delay(250);
+			delay(100);
 		}
 	}
 }
